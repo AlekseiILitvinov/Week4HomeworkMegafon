@@ -3,12 +3,14 @@ package ru.itpark.model;
 import java.util.ArrayList;
 
 public class ModemTariff extends Tariff {
+    public static final String NAME_PREFIX = "Твой безлимит на ";
+    public static final String NAME_POSTFIX = " месяцев";
     private String description;
     private String greenButtonText = "Выбрать";
     private String moreDetails = "Подробнее";
 
     public ModemTariff(ArrayList<String> highlights, int price, int pricingPeriod, String description) {
-        super("Твой безлимит на " + pricingPeriod + " месяцев", highlights, price, pricingPeriod);
+        super(NAME_PREFIX + pricingPeriod + NAME_POSTFIX, highlights, price, pricingPeriod);
         this.description = description;
     }
 

@@ -3,6 +3,7 @@ package ru.itpark.model;
 import java.util.ArrayList;
 
 public class TurnOnTariff extends Tariff {
+    public static final String NAME_PREFIX = "Включайся!\n";
     private ArrayList<BulletPoint> bulletPoints;
     private boolean isHit;
     private String greenButtonText = "Выбрать";
@@ -10,7 +11,7 @@ public class TurnOnTariff extends Tariff {
 
     public TurnOnTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
                         ArrayList<BulletPoint> bulletPoints, boolean isHit) {
-        super("Включайся!\n" + name, highlights, price, pricingPeriod, pricingAppendix);
+        super(NAME_PREFIX + name, highlights, price, pricingPeriod, pricingAppendix);
         this.bulletPoints = bulletPoints;
         this.isHit = isHit;
     }
