@@ -12,8 +12,8 @@ public class ModemTariff extends Tariff {
         this.description = description;
     }
 
-    public ModemTariff(String name, ArrayList<String> highlights, int price, String description) {
-        super(name, highlights, price, 1);
+    public ModemTariff(String name, ArrayList<String> highlights, int price, String pricingAppendix, String description) {
+        super(name, highlights, price, 1, pricingAppendix);
         this.description = description;
     }
 
@@ -30,16 +30,8 @@ public class ModemTariff extends Tariff {
     }
 
     @Override
-    public String getPriceLine() {
-        if (getPricingPeriod() == 1) {
-            return "" + getPrice() + " Р в месяц";
-        }
-        return "" + getPrice() + " Р";
-    }
-
-    @Override
     public String toString() {
-        return getName() + "\n" + getDescription() + "\n" + getHighlights() + "\n" + getPriceLine() + "\n" +
+        return getName() + "\n" + getDescription() + "\n" + getHighlightsLine() + "\n" + getPriceLine() + "\n" +
                 getGreenButtonText() + "\n" + getMoreDetails() + "\n";
     }
 }

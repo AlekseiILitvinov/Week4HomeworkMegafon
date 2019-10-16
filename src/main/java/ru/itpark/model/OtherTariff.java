@@ -5,7 +5,14 @@ import java.util.ArrayList;
 public abstract class OtherTariff extends Tariff {
     private String description;
 
-    public OtherTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String description) {
+    public OtherTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
+                       String description) {
+        super(name, highlights, price, pricingPeriod, pricingAppendix);
+        this.description = description;
+    }
+
+    public OtherTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod,
+                       String description) {
         super(name, highlights, price, pricingPeriod);
         this.description = description;
     }

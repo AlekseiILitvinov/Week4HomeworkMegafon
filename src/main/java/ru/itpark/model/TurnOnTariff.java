@@ -3,14 +3,23 @@ package ru.itpark.model;
 import java.util.ArrayList;
 
 public class TurnOnTariff extends Tariff {
-    private ArrayList<BulletPoint> bulletPoints = new ArrayList<>();
+    private ArrayList<BulletPoint> bulletPoints;
+    private boolean isHit;
     private String greenButtonText = "Выбрать";
     private String moreDetails = "Подробнее";
 
-    public TurnOnTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod,
-                        ArrayList<BulletPoint> bulletPoints) {
-        super("Включайся!\n" + name, highlights, price, pricingPeriod);
+    public TurnOnTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
+                        ArrayList<BulletPoint> bulletPoints, boolean isHit) {
+        super("Включайся!\n" + name, highlights, price, pricingPeriod, pricingAppendix);
         this.bulletPoints = bulletPoints;
+        this.isHit = isHit;
+    }
+
+    public TurnOnTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
+                        ArrayList<BulletPoint> bulletPoints) {
+        super("Включайся!\n" + name, highlights, price, pricingPeriod, pricingAppendix);
+        this.bulletPoints = bulletPoints;
+        this.isHit = false;
     }
 
     public ArrayList<BulletPoint> getBulletPoints() {
@@ -29,17 +38,33 @@ public class TurnOnTariff extends Tariff {
         return moreDetails;
     }
 
-    public String getPriceLine(){
-        return "" + this.getPrice() + "Р за " + this.getPricingPeriod() + " дней";
+    public boolean isHit() {
+        return isHit;
     }
 
-    public void addBulletPoint(BulletPoint bulletPoint){
+    public void setHit(boolean hit) {
+        isHit = hit;
+    }
+
+    public void addBulletPoint(BulletPoint bulletPoint) {
         bulletPoints.add(bulletPoint);
     }
 
     @Override
     public String toString() {
-        return getName() + "\n" + getHighlights() + "\n" + getBulletPoints() + "\n" + getPriceLine() + "\n" +
+        String hit = "";
+        if (isHit) {
+            hit = "\tХит";
+        }
+        return getName() + hit + "\n" + getHighlightsLine() + "\n" +  getBulletPointsLine() + "\n" + getPriceLine() + "\n" +
                 getGreenButtonText() + "\n" + getMoreDetails() + "\n";
+    }
+
+    private String getBulletPointsLine() {
+        StringBuilder bulletPointsLine = new StringBuilder();
+        for (BulletPoint bulletPoint : bulletPoints) {
+            bulletPointsLine.append(bulletPoint.getPictogramUrl()).append("\t").append(bulletPoint.getDescription()).append("\n");
+        }
+        return bulletPointsLine.toString();
     }
 }
