@@ -2,18 +2,11 @@ package ru.itpark.model;
 
 import java.util.ArrayList;
 
-public abstract class OtherTariff extends Tariff {
+public class OtherTariff extends Tariff {
     private String description;
 
-    public OtherTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
-                       String description) {
-        super(name, highlights, price, pricingPeriod, pricingAppendix);
-        this.description = description;
-    }
-
-    public OtherTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod,
-                       String description) {
-        super(name, highlights, price, pricingPeriod);
+    public OtherTariff(String name, ArrayList<String> highlights, boolean isUnlimitedInternet, boolean isUnlimitedCalls, int price, int pricingPeriod, String pricingAppendix, String description) {
+        super(name, highlights, isUnlimitedInternet, isUnlimitedCalls, price, pricingPeriod, pricingAppendix);
         this.description = description;
     }
 
@@ -23,5 +16,20 @@ public abstract class OtherTariff extends Tariff {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "OtherTariff{" +
+                "description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", highlights=" + highlights +
+                ", isUnlimitedInternet=" + isUnlimitedInternet +
+                ", isUnlimitedCalls=" + isUnlimitedCalls +
+                ", price=" + price +
+                ", pricingPeriod=" + pricingPeriod +
+                ", pricingAppendix='" + pricingAppendix + '\'' +
+                ", isSelectable=" + isSelectable +
+                '}';
     }
 }

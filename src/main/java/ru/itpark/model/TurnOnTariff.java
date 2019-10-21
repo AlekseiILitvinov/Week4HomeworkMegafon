@@ -3,24 +3,35 @@ package ru.itpark.model;
 import java.util.ArrayList;
 
 public class TurnOnTariff extends Tariff {
-    public static final String NAME_PREFIX = "Включайся!\n";
+    private static final String NAME_PREFIX = "Включайся!\n";
+    private static final int PRICING_PERIOD = 30;
+    private static final String PRICING_APPENDIX = "дней";
     private ArrayList<BulletPoint> bulletPoints;
     private boolean isHit;
-    private String greenButtonText = "Выбрать";
-    private String moreDetails = "Подробнее";
+    private int prepaidMinutes;
+    private int prepaidGb;
+    private int prepaidSMS;
 
-    public TurnOnTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
-                        ArrayList<BulletPoint> bulletPoints, boolean isHit) {
-        super(NAME_PREFIX + name, highlights, price, pricingPeriod, pricingAppendix);
+    public TurnOnTariff(String name,
+                        ArrayList<String> highlights,
+                        boolean isUnlimitedInternet,
+                        boolean isUnlimitedCalls,
+                        int price,
+                        ArrayList<BulletPoint> bulletPoints,
+                        boolean isHit,
+                        int prepaidMinutes,
+                        int prepaidGb,
+                        int prepaidSMS) {
+        super(NAME_PREFIX + name, highlights, isUnlimitedInternet, isUnlimitedCalls, price, PRICING_PERIOD, PRICING_APPENDIX);
         this.bulletPoints = bulletPoints;
         this.isHit = isHit;
+        this.prepaidMinutes = prepaidMinutes;
+        this.prepaidGb = prepaidGb;
+        this.prepaidSMS = prepaidSMS;
     }
 
-    public TurnOnTariff(String name, ArrayList<String> highlights, int price, int pricingPeriod, String pricingAppendix,
-                        ArrayList<BulletPoint> bulletPoints) {
-        super("Включайся!\n" + name, highlights, price, pricingPeriod, pricingAppendix);
-        this.bulletPoints = bulletPoints;
-        this.isHit = false;
+    public static String getNamePrefix() {
+        return NAME_PREFIX;
     }
 
     public ArrayList<BulletPoint> getBulletPoints() {
@@ -31,14 +42,6 @@ public class TurnOnTariff extends Tariff {
         this.bulletPoints = bulletPoints;
     }
 
-    public String getGreenButtonText() {
-        return greenButtonText;
-    }
-
-    public String getMoreDetails() {
-        return moreDetails;
-    }
-
     public boolean isHit() {
         return isHit;
     }
@@ -47,25 +50,46 @@ public class TurnOnTariff extends Tariff {
         isHit = hit;
     }
 
-    public void addBulletPoint(BulletPoint bulletPoint) {
-        bulletPoints.add(bulletPoint);
+    public int getPrepaidMinutes() {
+        return prepaidMinutes;
+    }
+
+    public void setPrepaidMinutes(int prepaidMinutes) {
+        this.prepaidMinutes = prepaidMinutes;
+    }
+
+    public int getPrepaidGb() {
+        return prepaidGb;
+    }
+
+    public void setPrepaidGb(int prepaidGb) {
+        this.prepaidGb = prepaidGb;
+    }
+
+    public int getPrepaidSMS() {
+        return prepaidSMS;
+    }
+
+    public void setPrepaidSMS(int prepaidSMS) {
+        this.prepaidSMS = prepaidSMS;
     }
 
     @Override
     public String toString() {
-        String hit = "";
-        if (isHit) {
-            hit = "\tХит";
-        }
-        return getName() + hit + "\n" + getHighlightsLine() + "\n" +  getBulletPointsLine() + "\n" + getPriceLine() + "\n" +
-                getGreenButtonText() + "\n" + getMoreDetails() + "\n";
-    }
-
-    private String getBulletPointsLine() {
-        StringBuilder bulletPointsLine = new StringBuilder();
-        for (BulletPoint bulletPoint : bulletPoints) {
-            bulletPointsLine.append(bulletPoint.getPictogramUrl()).append("\t").append(bulletPoint.getDescription()).append("\n");
-        }
-        return bulletPointsLine.toString();
+        return "TurnOnTariff{" +
+                "bulletPoints=" + bulletPoints +
+                ", isHit=" + isHit +
+                ", prepaidMinutes=" + prepaidMinutes +
+                ", prepaidGb=" + prepaidGb +
+                ", prepaidSMS=" + prepaidSMS +
+                ", name='" + name + '\'' +
+                ", highlights=" + highlights +
+                ", isUnlimitedInternet=" + isUnlimitedInternet +
+                ", isUnlimitedCalls=" + isUnlimitedCalls +
+                ", price=" + price +
+                ", pricingPeriod=" + pricingPeriod +
+                ", pricingAppendix='" + pricingAppendix + '\'' +
+                ", isSelectable=" + isSelectable +
+                '}';
     }
 }
